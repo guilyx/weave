@@ -1,0 +1,13 @@
+/target
+/data
+.env
+*.db
+node_modules
+dist
+__pycache__
+.venv
+python/weave/.venv
+.pytest_cache
+.DS_Store
+*.wav
+*.webm

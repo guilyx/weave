@@ -1,0 +1,10 @@
+target
+data
+.env
+.git
+web/node_modules
+web/dist
+python/weave/.venv
+**/__pycache__
+*.md
+.cursor
