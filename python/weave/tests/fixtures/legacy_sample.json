@@ -1,0 +1,19 @@
+{
+  "name": "Bhaal",
+  "race": { "fullName": "Half-Orc" },
+  "classes": [
+    {
+      "level": 1,
+      "definition": { "name": "Warlock" }
+    }
+  ],
+  "stats": [
+    { "id": 1, "value": 6 },
+    { "id": 2, "value": 11 },
+    { "id": 3, "value": 14 },
+    { "id": 4, "value": 12 },
+    { "id": 5, "value": 12 },
+    { "id": 6, "value": 17 }
+  ],
+  "baseHitPoints": 10
+}

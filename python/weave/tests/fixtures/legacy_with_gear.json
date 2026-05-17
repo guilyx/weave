@@ -1,0 +1,47 @@
+{
+  "name": "Aria",
+  "race": { "fullName": "High Elf" },
+  "alignment": "Chaotic Good",
+  "speed": 30,
+  "proficiencyBonus": 2,
+  "classes": [
+    {
+      "level": 3,
+      "definition": { "name": "Wizard" }
+    }
+  ],
+  "stats": [
+    { "id": 1, "value": 8 },
+    { "id": 2, "value": 14 },
+    { "id": 3, "value": 12 },
+    { "id": 4, "value": 16 },
+    { "id": 5, "value": 10 },
+    { "id": 6, "value": 12 }
+  ],
+  "baseHitPoints": 18,
+  "armorClass": 13,
+  "background": { "definition": { "name": "Sage" } },
+  "inventory": [
+    {
+      "equipped": true,
+      "quantity": 1,
+      "definition": { "name": "Staff of Power", "type": "Staff" }
+    },
+    {
+      "equipped": false,
+      "quantity": 2,
+      "definition": { "name": "Healing Potion", "type": "Potion" }
+    }
+  ],
+  "feats": [
+    { "definition": { "name": "War Caster" } }
+  ],
+  "spells": [
+    {
+      "spells": [
+        { "definition": { "name": "Fire Bolt", "level": 0 }, "prepared": true },
+        { "definition": { "name": "Shield", "level": 1 }, "prepared": true }
+      ]
+    }
+  ]
+}
