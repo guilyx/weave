@@ -1,0 +1,217 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Cinzel", ui-serif, Georgia, serif;
+  --font-body: "Source Sans 3", ui-sans-serif, system-ui, sans-serif;
+  --color-ink: #0c0a09;
+  --color-parchment: #f5f0e6;
+  --color-parchment-dark: #e8dfd0;
+  --color-gold: #c9a227;
+  --color-gold-bright: #e8c547;
+  --color-crimson: #7f1d1d;
+  --color-moss: #14532d;
+  --color-surface: #1a1612;
+  --color-surface-raised: #252019;
+  --color-border: #3d3428;
+  --color-muted: #a89f8f;
+  --color-scrollbar-track: #1a1612;
+  --color-scrollbar-thumb: #4a4034;
+  --color-scrollbar-thumb-hover: #c9a227;
+}
+
+@layer base {
+  html {
+    @apply h-dvh max-h-dvh antialiased;
+  }
+
+  body,
+  #root {
+    @apply h-full max-h-dvh overflow-hidden;
+  }
+
+  body {
+    @apply bg-ink font-body text-base leading-relaxed text-parchment;
+    background-image:
+      radial-gradient(ellipse 120% 80% at 50% -20%, rgb(201 162 39 / 0.12), transparent),
+      radial-gradient(ellipse 60% 40% at 100% 100%, rgb(127 29 29 / 0.08), transparent);
+  }
+
+  ::selection {
+    @apply bg-gold/30 text-parchment;
+  }
+
+  /* Firefox */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-scrollbar-thumb) var(--color-scrollbar-track);
+  }
+
+  /* Chromium / Safari */
+  *::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: var(--color-scrollbar-track);
+    border-radius: 4px;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background: linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--color-scrollbar-thumb) 90%, var(--color-gold) 10%),
+      var(--color-scrollbar-thumb)
+    );
+    border: 2px solid var(--color-scrollbar-track);
+    border-radius: 999px;
+    min-height: 2rem;
+  }
+
+  *::-webkit-scrollbar-thumb:hover {
+    background: color-mix(in srgb, var(--color-scrollbar-thumb-hover) 75%, var(--color-gold) 25%);
+    border-color: color-mix(in srgb, var(--color-scrollbar-track) 80%, var(--color-gold) 20%);
+  }
+
+  *::-webkit-scrollbar-thumb:active {
+    background: var(--color-gold);
+  }
+
+  *::-webkit-scrollbar-corner {
+    background: var(--color-scrollbar-track);
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: var(--font-display);
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Optional: hide scrollbar until hover (use on dense panels) */
+  .scrollbar-subtle {
+    scrollbar-color: transparent transparent;
+  }
+
+  .scrollbar-subtle::-webkit-scrollbar-thumb {
+    background: transparent;
+    border-color: transparent;
+  }
+
+  .scrollbar-subtle:hover {
+    scrollbar-color: var(--color-scrollbar-thumb) var(--color-scrollbar-track);
+  }
+
+  .scrollbar-subtle:hover::-webkit-scrollbar-thumb {
+    background: linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--color-scrollbar-thumb) 90%, var(--color-gold) 10%),
+      var(--color-scrollbar-thumb)
+    );
+    border-color: var(--color-scrollbar-track);
+  }
+
+  /* Readable long-form (recaps, AI replies) */
+  .prose-table {
+    @apply text-lg leading-[1.75] text-parchment/95;
+    font-feature-settings: "kern" 1, "liga" 1;
+  }
+
+  .prose-table p + p {
+    @apply mt-4;
+  }
+
+  /* Chat agent replies (Markdown) */
+  .prose-chat {
+    @apply text-base leading-relaxed text-parchment/95;
+  }
+
+  .prose-chat > *:first-child {
+    @apply mt-0;
+  }
+
+  .prose-chat > *:last-child {
+    @apply mb-0;
+  }
+
+  .prose-chat p {
+    @apply my-3;
+  }
+
+  .prose-chat h1,
+  .prose-chat h2,
+  .prose-chat h3,
+  .prose-chat h4 {
+    @apply mt-4 mb-2 font-display font-semibold text-gold;
+  }
+
+  .prose-chat h3 {
+    @apply text-lg;
+  }
+
+  .prose-chat ul,
+  .prose-chat ol {
+    @apply my-3 ml-5 space-y-1.5;
+  }
+
+  .prose-chat ul {
+    @apply list-disc;
+  }
+
+  .prose-chat ol {
+    @apply list-decimal;
+  }
+
+  .prose-chat li {
+    @apply pl-1;
+  }
+
+  .prose-chat strong {
+    @apply font-semibold text-parchment;
+  }
+
+  .prose-chat em {
+    @apply text-parchment/90 italic;
+  }
+
+  .prose-chat blockquote {
+    @apply my-3 border-l-2 border-gold/40 pl-4 text-muted italic;
+  }
+
+  .prose-chat hr {
+    @apply my-4 border-border/60;
+  }
+
+  .ornament-divider {
+    @apply my-4 h-px w-full border-0;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      color-mix(in srgb, var(--color-gold) 40%, transparent),
+      transparent
+    );
+  }
+
+  .panel-inset {
+    @apply rounded-xl border border-border/80 bg-ink/40;
+  }
+
+  .live-pulse {
+    animation: live-pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes live-pulse {
+    0%,
+    100% {
+      opacity: 1;
+      box-shadow: 0 0 0 0 rgb(201 162 39 / 0.35);
+    }
+    50% {
+      opacity: 0.85;
+      box-shadow: 0 0 0 6px rgb(201 162 39 / 0);
+    }
+  }
+}
