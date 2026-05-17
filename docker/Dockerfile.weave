@@ -1,0 +1,23 @@
+FROM ghcr.io/astral-sh/uv:python3.12-bookworm-slim
+
+WORKDIR /app
+# Cursor Agent CLI (https://cursor.com/docs/cli/installation) — auth via CURSOR_API_KEY at runtime
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends ca-certificates curl bash \
+    && rm -rf /var/lib/apt/lists/* \
+    && curl -fsSL https://cursor.com/install | bash \
+    && /root/.local/bin/agent --version
+
+ENV PATH="/root/.local/bin:${PATH}"
+ENV CURSOR_AGENT_BIN=agent
+
+COPY python/weave/pyproject.toml python/weave/uv.lock python/weave/README.md ./
+COPY python/weave/src ./src
+COPY migrations /migrations
+RUN uv sync --frozen --no-dev --extra stt
+
+ENV PYTHONUNBUFFERED=1
+ENV MIGRATIONS_PATH=/migrations
+ENV API_BIND=0.0.0.0:8080
+EXPOSE 8080
+CMD ["uv", "run", "uvicorn", "weave.main:app", "--host", "0.0.0.0", "--port", "8080"]
